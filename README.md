@@ -1,11 +1,19 @@
 # Enterprise Agentic SOC (v1.04)
 
 <p align="center">
-  <img src="docs/assets/screenshots/screenshot-1.png" alt="Case Detail Overview" width="49%" />
-  <img src="docs/assets/screenshots/dashboard.png" alt="SOC Dashboard" width="49%" />
+  <img src="docs/assets/screenshots/screenshot-1.png" alt="Case Detail Overview" width="96%" />
+</p>
+<p align="center">
+  <img src="docs/assets/screenshots/dashboard.png" alt="SOC Dashboard" width="96%" />
 </p>
 
 Production-oriented SOC triage system that combines deterministic guardrails with LLM-assisted investigation, then surfaces outcomes in a web UI with auditable agent/tool execution records.
+
+## Documentation
+
+- Engineering architecture report: [docs/reports/ENGINEERING_REPORT.md](docs/reports/ENGINEERING_REPORT.md)
+- UI/UX review report: [docs/reports/UI_UX_REPORT.md](docs/reports/UI_UX_REPORT.md)
+- Additional technical docs: [docs/wiki](docs/wiki)
 
 ## What This Project Delivers
 
@@ -216,9 +224,3 @@ pytest -q
 - Keep `.env` uncommitted; use `.env.example` as the public template.
 - Replace all placeholder secrets before running in non-local environments.
 - Review `tests/fixtures/` before publishing if your organization treats sample telemetry as sensitive.
-
-## Documentation
-
-- Engineering architecture report: [docs/reports/ENGINEERING_REPORT.md](docs/reports/ENGINEERING_REPORT.md)
-- UI/UX review report: [docs/reports/UI_UX_REPORT.md](docs/reports/UI_UX_REPORT.md)
-- Additional technical docs: [docs/wiki](docs/wiki)

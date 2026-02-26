@@ -22,3 +22,4 @@ runs/
 .pytest_cache/
 soc_case_ui/frontend/node_modules/
 jira_webhook_local/.generated/
+Elastic_in_Docker/
