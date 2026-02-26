@@ -1,0 +1,32 @@
+{
+  "name": "ioc_enrichment_specialist",
+  "display_name": "IOC Enrichment Specialist",
+  "description": "Deterministically normalizes and enriches IOC values (classification, reverse DNS, hash type) for downstream pivots.",
+  "specialist": "ioc_enrichment_specialist",
+  "enabled_by_default": true,
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "iocs": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"type": "string"},
+            {"type": "object"}
+          ]
+        }
+      }
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "required": ["enriched_iocs", "summary"]
+  },
+  "guardrails": [
+    "No external execution.",
+    "Deterministic enrichment only."
+  ],
+  "timeout_seconds": 20,
+  "max_retries": 0,
+  "cost_class": "low"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "virustotal_specialist",
+  "display_name": "VirusTotal Specialist",
+  "description": "Performs bounded reputation lookups for public IOCs only and returns normalized verdict summaries.",
+  "specialist": "virustotal_specialist",
+  "enabled_by_default": true,
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "indicators": {"type": "array", "items": {"type": "string"}},
+      "max_indicators": {"type": "integer", "minimum": 1, "maximum": 10}
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "required": ["results", "summary"]
+  },
+  "guardrails": [
+    "Never query internal/private IPs.",
+    "Bound indicator count to control external API costs."
+  ],
+  "timeout_seconds": 45,
+  "max_retries": 1,
+  "cost_class": "medium"
+}

@@ -1,0 +1,29 @@
+{
+  "name": "entra_specialist",
+  "display_name": "Entra ID Sign-In Specialist",
+  "description": "Queries Microsoft Graph sign-in telemetry with bounded lookback to validate identity context and anomalous authentication activity.",
+  "specialist": "entra_specialist",
+  "enabled_by_default": true,
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "user_name": {"type": "string"},
+      "user_id": {"type": "string"},
+      "source_ip": {"type": "string"},
+      "lookback_hours": {"type": "integer", "minimum": 1, "maximum": 168},
+      "max_results": {"type": "integer", "minimum": 1, "maximum": 100}
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "required": ["events", "summary"]
+  },
+  "guardrails": [
+    "Fail closed if credentials are missing.",
+    "Use read-only Graph APIs only.",
+    "Enforce lookback and result limits."
+  ],
+  "timeout_seconds": 45,
+  "max_retries": 1,
+  "cost_class": "medium"
+}

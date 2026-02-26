@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}SOC Console{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/app.css" />
+  {% block head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <div class="bg-grid"></div>
+  <div class="app-shell">
+    <aside class="app-sidebar">
+      <a class="side-logo" href="/" aria-label="SOC Console Home">S</a>
+      <nav class="side-nav">
+        <a
+          class="side-nav-link {% if request.url.path == '/' %}active{% endif %}"
+          href="/"
+          title="Dashboard"
+        >DB</a>
+        <a
+          class="side-nav-link {% if request.url.path.startswith('/tickets') %}active{% endif %}"
+          href="/"
+          title="Cases"
+        >CS</a>
+      </nav>
+    </aside>
+
+    <div class="app-main">
+      <header class="app-topbar">
+        <div class="crumb-line">{% block breadcrumb %}SOC CONSOLE / Dashboard{% endblock %}</div>
+        <div class="topbar-pills">
+          <span class="chip chip-muted">Orchestrated v2</span>
+          <span class="chip chip-live">LIVE</span>
+        </div>
+      </header>
+      <main class="page-wrap">
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+</body>
+</html>

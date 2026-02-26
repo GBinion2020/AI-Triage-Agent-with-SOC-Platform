@@ -1,0 +1,78 @@
+import json
+import re
+from llm.client import LLMClient
+from schemas.state import InvestigationState
+
+class IntakeAgent:
+    def __init__(self, llm_client: LLMClient):
+        self.llm = llm_client
+        self.last_prompt: str = ""
+        self.last_raw_response: str = ""
+        self.last_error: str = ""
+        
+    def evaluate(self, state: InvestigationState) -> str:
+        """
+        Routing decision: 'investigate' or 'close_benign'.
+        Grounded in historical context (lessons_learned).
+        """
+        alert = state.alert
+            
+        signals = alert.analysis_signals
+        
+        # 2. Prepare Active Signals & Full Alert Context
+        # Only show the signals that are TRUE/Present to concise context
+        active_signals = []
+        for field, value in signals.model_dump(exclude_none=True).items():
+            if value is True:
+                active_signals.append(f"- {field}: DETECTED")
+            elif isinstance(value, str) and value:
+                active_signals.append(f"- {field}: {value}")
+            elif field == "confidence_boost" and value > 0:
+                active_signals.append(f"- confidence_boost: {value}")
+        
+        signals_text = "\n".join(active_signals) if active_signals else "None detected."
+
+        # Full Alert Context (Excluding Nulls and Huge Raw Data) - Minified
+        alert_json = json.dumps(alert.model_dump(exclude_none=True, exclude={"raw_data"}), default=str)
+
+        # 3. LLM Evaluation
+        prompt = f"""
+        ACT: SOC Intake Analyst.
+        ROLE: You are the gatekeeper. Your job is to filter out OBVIOUS false positives.
+        
+        FULL NORMALIZED ALERT DATA:
+        {alert_json}
+        
+        active_analysis_signals (SUMMARY):
+        {signals_text}
+        
+        LESSONS LEARNED FROM SIMILAR PAST INCIDENTS:
+        {state.lessons_learned if state.lessons_learned else "No relevant past incidents found."}
+        
+        CRITICAL RULES:
+        1. You are ONLY allowed to close alerts as 'close_benign' if you are >95% confident they are harmless.
+        2. Inspect the 'active_analysis_signals'. If ANY technical signal is present (e.g., encoded_command, external_communication), you MUST default to 'investigate' unless you can prove it is business-as-usual.
+        3. If 'confidence_boost' is high (>0.3), assume it is malicious.
+        
+        TASK:
+        Decide whether to investigate or close.
+        
+        OUTPUT: JSON only. {{ "decision": "investigate" | "close_benign", "reason": "..." }}
+        """
+        self.last_prompt = prompt
+        self.last_raw_response = ""
+        self.last_error = ""
+        
+        try:
+            resp = self.llm.generate(prompt)
+            self.last_raw_response = resp
+            match = re.search(r'(\{.*\})', resp, re.DOTALL)
+            if match:
+                data = json.loads(match.group(1))
+                return data.get("decision", "investigate")
+            else:
+                return "investigate"
+                
+        except Exception as e:
+            self.last_error = str(e)
+            return "investigate"

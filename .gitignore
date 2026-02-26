@@ -1,0 +1,24 @@
+.env
+.cache/
+__pycache__/
+.venv/
+*.pyc
+
+# Investigation Artifacts
+audit_trail_*.json
+logs_*.txt
+*.log
+debug_output.*
+
+# Persistent DB (Optional - usually excluded if large)
+chroma_db/
+feedback_api/*.db
+*.sqlite3
+cases/
+soc_case_ui/soc_ui.db
+
+pipeline_logs/
+runs/
+.pytest_cache/
+soc_case_ui/frontend/node_modules/
+jira_webhook_local/.generated/

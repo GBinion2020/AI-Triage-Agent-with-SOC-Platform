@@ -1,0 +1,51 @@
+{
+  "id": "10001",
+  "key": "SOC-LOCAL-1",
+  "fields": {
+    "summary": "Suspicious PowerShell from endpoint host",
+    "updated": 1739900000000,
+    "status": {
+      "name": "Done"
+    },
+    "project": {
+      "key": "SOC",
+      "name": "SOC Operations"
+    },
+    "description": {
+      "type": "doc",
+      "version": 1,
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Investigated process tree and command-line behavior around alert time."
+            }
+          ]
+        }
+      ]
+    },
+    "customfield_10101": {
+      "type": "doc",
+      "version": 1,
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "False positive. Scheduled admin script execution was expected."
+            }
+          ]
+        }
+      ]
+    },
+    "customfield_10100": {
+      "value": "Benign Admin Activity"
+    },
+    "customfield_10099": {
+      "value": "False Positive"
+    }
+  }
+}

@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block title %}Case {{ ticket_id }}{% endblock %}
+{% block breadcrumb %}SOC CONSOLE / Cases{% endblock %}
+
+{% block content %}
+<section class="ticket-shell" data-ticket-id="{{ ticket_id }}" id="ticketRoot">
+  <div class="ticket-page-header">
+    <div class="ticket-page-left">
+      <a class="back-link" href="/">Back to Cases</a>
+      <h1 id="ticketTitle">Case</h1>
+      <p id="ticketSubtitle" class="mono">Loading...</p>
+      <div id="ticketSlaLine" class="sla-line"></div>
+    </div>
+    <div class="ticket-page-actions">
+      <a class="btn btn-ghost" id="auditLink" href="#">LLM Auditability</a>
+      <a class="btn btn-ghost" id="downloadCaseLink" href="#">Download Case</a>
+    </div>
+  </div>
+
+  <div class="ticket-layout">
+    <div class="ticket-main-col">
+      <article class="glass-panel result-panel">
+        <div class="result-grid">
+          <div>
+            <div class="result-label">AI Triage Result</div>
+            <div id="resultClassification" class="result-title">Unclassified</div>
+            <p id="resultSummary" class="result-summary">No triage summary yet.</p>
+          </div>
+          <div class="score-ring-wrap">
+            <div class="score-ring">
+              <span id="resultScore">0</span>
+            </div>
+            <div id="resultVerdict" class="result-verdict">Pending</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="glass-panel indicator-panel">
+        <div class="panel-top">
+          <h2>Indicators Of Compromise</h2>
+        </div>
+        <div id="iocChips" class="ioc-chip-row"></div>
+      </article>
+
+      <article class="glass-panel details-panel">
+        <div class="panel-top">
+          <h2>Alert Details</h2>
+        </div>
+        <div class="details-grid">
+          <div class="detail-cell">
+            <span>Severity</span>
+            <strong id="detailSeverity">-</strong>
+          </div>
+          <div class="detail-cell">
+            <span>Status</span>
+            <strong id="detailStatus">-</strong>
+          </div>
+          <div class="detail-cell">
+            <span>Created</span>
+            <strong id="detailCreated">-</strong>
+          </div>
+        </div>
+      </article>
+
+      <article class="glass-panel evidence-panel">
+        <div class="panel-top">
+          <h2>Evidence Events</h2>
+        </div>
+        <div class="events-table-wrap">
+          <table class="events-table">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Event</th>
+                <th>Source</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody id="evidenceTableBody"></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="glass-panel">
+        <div class="panel-top">
+          <h2>Investigation Steps</h2>
+        </div>
+        <div id="investigationSteps" class="investigation-list"></div>
+      </article>
+
+      <article class="glass-panel">
+        <div class="panel-top">
+          <h2>Pipeline Health</h2>
+        </div>
+        <div id="runHealth" class="status-grid"></div>
+      </article>
+    </div>
+
+    <aside class="ticket-side-col">
+      <article class="glass-panel analyst-panel">
+        <div class="panel-top">
+          <h2>Analyst Actions</h2>
+        </div>
+        <div class="ticket-grid">
+          <div class="field-group">
+            <label for="statusSelect">Ticket Status</label>
+            <select id="statusSelect">
+              <option value="to_do">To Do</option>
+              <option value="in_progress">In Progress</option>
+              <option value="done">Done</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="classificationSelect">Classification</label>
+            <select id="classificationSelect">
+              <option value="">Select classification</option>
+              <option value="benign">Benign</option>
+              <option value="suspicious">Suspicious</option>
+              <option value="malicious">Malicious</option>
+              <option value="false_positive">False Positive</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="verdictSelect">Verdict</label>
+            <select id="verdictSelect">
+              <option value="">Select verdict</option>
+              <option value="close">Close</option>
+              <option value="escalate_to_ir">Escalate to IR</option>
+              <option value="block_asset_user">Block Asset/User</option>
+              <option value="monitor">Monitor</option>
+            </select>
+          </div>
+          <div class="field-group field-group-wide">
+            <label for="closeNote">Close Note</label>
+            <textarea id="closeNote" rows="8" placeholder="Analyst close note for this alert..."></textarea>
+            <div class="quick-templates">
+              <button class="btn btn-ghost template-btn" data-template="benign_test">Benign Template</button>
+              <button class="btn btn-ghost template-btn" data-template="suspicious_monitor">Suspicious Template</button>
+              <button class="btn btn-ghost template-btn" data-template="malicious_escalate">Malicious Template</button>
+            </div>
+          </div>
+          <div class="field-actions">
+            <button id="saveTicketBtn" class="btn btn-primary">Save Ticket</button>
+            <span id="saveTicketMsg" class="inline-msg"></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="glass-panel">
+        <div class="panel-top">
+          <h2>Analyst Comments</h2>
+        </div>
+        <div id="commentList" class="comment-list"></div>
+        <div class="comment-editor">
+          <input type="text" id="commentAuthor" value="analyst" placeholder="Author" />
+          <textarea id="commentBody" rows="4" placeholder="Add a ticket comment..."></textarea>
+          <button id="addCommentBtn" class="btn btn-primary">Add Comment</button>
+        </div>
+      </article>
+
+      <article class="glass-panel">
+        <div class="panel-top">
+          <h2>Activity</h2>
+        </div>
+        <ul id="activityList" class="activity-list"></ul>
+      </article>
+    </aside>
+  </div>
+</section>
+
+<script src="/static/js/ticket.js"></script>
+{% endblock %}

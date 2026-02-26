@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}LLM Auditability{% endblock %}
+{% block breadcrumb %}SOC CONSOLE / Cases{% endblock %}
+
+{% block content %}
+<section class="audit-shell" data-ticket-id="{{ ticket_id }}" id="auditRoot">
+  <div class="ticket-page-header">
+    <div class="ticket-page-left">
+      <a class="back-link" id="backToTicket" href="#">Back to Case</a>
+      <h1 id="auditTitle">LLM Auditability</h1>
+      <p id="auditSubtitle" class="mono">Ticket {{ ticket_id }}</p>
+    </div>
+  </div>
+
+  <div class="audit-layout">
+    <article class="glass-panel">
+      <div class="panel-top">
+        <h2>Agent Execution Graph</h2>
+        <div class="diagram-legend">
+          <span class="legend-pill legend-agent">Agent / LLM</span>
+          <span class="legend-pill legend-tool">Tool Specialist</span>
+          <span id="graphStats" class="legend-pill legend-stats">0 nodes</span>
+        </div>
+      </div>
+      <div id="auditDiagram" class="diagram-lane"></div>
+    </article>
+
+    <article class="glass-panel">
+      <div class="panel-top">
+        <h2>Node Details</h2>
+      </div>
+      <div id="nodeDetailMeta" class="node-meta">Select a node.</div>
+      <pre id="nodeDetailBody" class="detail-json"></pre>
+    </article>
+  </div>
+</section>
+
+<script src="/static/js/audit.js"></script>
+{% endblock %}

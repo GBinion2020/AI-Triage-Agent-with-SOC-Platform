@@ -1,0 +1,22 @@
+{
+  "name": "timeline_specialist",
+  "display_name": "Timeline Specialist",
+  "description": "Builds a chronological event timeline from collected evidence artifacts to improve final decision clarity.",
+  "specialist": "timeline_specialist",
+  "enabled_by_default": true,
+  "input_schema": {
+    "type": "object",
+    "properties": {}
+  },
+  "output_schema": {
+    "type": "object",
+    "required": ["timeline", "summary"]
+  },
+  "guardrails": [
+    "Read-only aggregation over existing evidence.",
+    "No new external data fetches."
+  ],
+  "timeout_seconds": 20,
+  "max_retries": 0,
+  "cost_class": "low"
+}

@@ -1,0 +1,25 @@
+services:
+  soc-case-ui:
+    build:
+      context: ..
+      dockerfile: soc_case_ui/Dockerfile
+    container_name: soc-case-ui
+    env_file:
+      - ../.env
+    environment:
+      SOC_UI_HOST: 0.0.0.0
+      SOC_UI_PORT: 8088
+      ELASTIC_BASE_URL: ${SOC_UI_ELASTIC_BASE_URL:-https://host.docker.internal:9200}
+      PYTHONUNBUFFERED: "1"
+    ports:
+      - "${SOC_UI_PORT:-8088}:8088"
+    volumes:
+      - ../:/app
+      - ../.cache/chroma:/root/.cache/chroma
+    command: ["uvicorn", "soc_case_ui.app:app", "--host", "0.0.0.0", "--port", "8088"]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8088/healthz"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 20s

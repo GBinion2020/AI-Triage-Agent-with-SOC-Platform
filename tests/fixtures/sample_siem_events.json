@@ -1,0 +1,49 @@
+{
+  "query_context": {
+    "host_name": "host-1",
+    "alert_timestamp": "2026-01-01T00:00:00Z",
+    "time_range": {
+      "start": "2025-12-31T23:45:00Z",
+      "end": "2026-01-01T00:15:00Z"
+    },
+    "filters": {
+      "process_name": null,
+      "event_code": "403",
+      "message_contains": null,
+      "source_ip": null,
+      "destination_ip": null,
+      "user_id": null
+    },
+    "max_results": 25
+  },
+  "results_count": 2,
+  "truncated": false,
+  "events": [
+    {
+      "@timestamp": "2026-01-01T00:00:01Z",
+      "timestamp": "2026-01-01T00:00:01Z",
+      "event_action": "Provider Lifecycle",
+      "event_code": "403",
+      "message": "PowerShell launched AutoIt",
+      "process_name": "powershell.exe",
+      "process_command_line": "powershell.exe Start-Process AutoIt3.exe",
+      "source_ip": "",
+      "destination_ip": "",
+      "dns_question": "",
+      "file_hash_sha256": ""
+    },
+    {
+      "@timestamp": "2026-01-01T00:00:10Z",
+      "timestamp": "2026-01-01T00:00:10Z",
+      "event_action": "Execute a Remote Command",
+      "event_code": "4104",
+      "message": "telnet_client.exe 127.0.0.1 --port 23",
+      "process_name": "telnet_client.exe",
+      "process_command_line": "telnet_client.exe 127.0.0.1 --port 23",
+      "source_ip": "",
+      "destination_ip": "127.0.0.1",
+      "dns_question": "",
+      "file_hash_sha256": ""
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.git
+.gitignore
+chroma_db
+runs
+pipeline_logs
+cases
+feedback_api/*.db
+soc_case_ui/soc_ui.db
+Elastic_in_Docker

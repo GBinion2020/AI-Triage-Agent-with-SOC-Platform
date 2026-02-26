@@ -1,0 +1,23 @@
+{
+  "id": "{{issue.id}}",
+  "key": "{{issue.key}}",
+  "fields": {
+    "summary": "{{issue.summary}}",
+    "updated": "{{issue.updated.toMillis}}",
+    "status": {
+      "name": "{{issue.status.name}}"
+    },
+    "project": {
+      "key": "{{issue.project.key}}",
+      "name": "{{issue.project.name}}"
+    },
+    "description": "{{issue.description}}",
+    "customfield_10101": "{{issue.customfield_10101}}",
+    "customfield_10100": {
+      "value": "{{issue.customfield_10100.value}}"
+    },
+    "customfield_10099": {
+      "value": "{{issue.customfield_10099.value}}"
+    }
+  }
+}

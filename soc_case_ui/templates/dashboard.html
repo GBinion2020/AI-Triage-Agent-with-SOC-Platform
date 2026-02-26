@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}SOC Console Dashboard{% endblock %}
+{% block breadcrumb %}SOC CONSOLE / Dashboard{% endblock %}
+
+{% block content %}
+<section class="dashboard-shell">
+  <article class="glass-panel hero-panel">
+    <div class="hero-row">
+      <div>
+        <h1 class="hero-title">SOC Overview</h1>
+        <p class="hero-subtitle" id="dashboardDate">Security case operations and live pipeline control.</p>
+      </div>
+      <div class="hero-actions">
+        <label class="inline-field">
+          <span>LLM Provider</span>
+          <select id="llmProvider">
+            <option value="external">External</option>
+            <option value="local">Local</option>
+          </select>
+        </label>
+        <label class="inline-field">
+          <span>Pipeline Mode</span>
+          <select id="pipelineArch">
+            <option value="orchestrated">Orchestrated</option>
+            <option value="legacy">Legacy</option>
+          </select>
+        </label>
+        <button id="startPipelineBtn" class="btn btn-primary">Start Pipeline</button>
+      </div>
+    </div>
+
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="metric-label">Total Cases</div>
+        <div id="queueCount" class="metric-value">0</div>
+        <div class="metric-meta">All time</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Critical</div>
+        <div id="criticalCount" class="metric-value">0</div>
+        <div class="metric-meta">Immediate action</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Investigating</div>
+        <div id="inProgressCount" class="metric-value">0</div>
+        <div class="metric-meta">In progress</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Resolved</div>
+        <div id="resolvedCount" class="metric-value">0</div>
+        <div class="metric-meta">Closed out</div>
+      </div>
+    </div>
+  </article>
+
+  <div class="workspace-grid">
+    <article class="glass-panel cases-panel">
+      <div class="panel-top">
+        <h2>Recent Cases</h2>
+      </div>
+      <div class="cases-filter-row">
+        <input id="ticketSearch" type="text" placeholder="Search cases..." />
+        <select id="ticketStatusFilter">
+          <option value="all">All Status</option>
+          <option value="to_do">To Do</option>
+          <option value="in_progress">In Progress</option>
+          <option value="done">Done</option>
+        </select>
+        <label class="checkbox-inline">
+          <input id="criticalOnlyToggle" type="checkbox" />
+          <span>High/Critical only</span>
+        </label>
+      </div>
+      <div class="cases-table-wrap">
+        <table class="ticket-table">
+          <thead>
+            <tr>
+              <th>Case</th>
+              <th>Severity</th>
+              <th>Status</th>
+              <th>SLA</th>
+              <th>Classification</th>
+            </tr>
+          </thead>
+          <tbody id="ticketTableBody"></tbody>
+        </table>
+      </div>
+    </article>
+
+    <article class="glass-panel stream-panel">
+      <div class="panel-top">
+        <h2>Pipeline Session</h2>
+        <button id="clearLogBtn" class="btn btn-ghost">Clear</button>
+      </div>
+      <div class="status-grid compact-grid">
+        <div class="status-card">
+          <div class="label">Run Status</div>
+          <div id="runStatus" class="value">idle</div>
+        </div>
+        <div class="status-card">
+          <div class="label">Session</div>
+          <div id="runSession" class="value mono">-</div>
+        </div>
+        <div class="status-card">
+          <div class="label">Ticket</div>
+          <div id="runTicket" class="value mono">-</div>
+        </div>
+      </div>
+      <div class="stream-overdue">Overdue SLA: <span id="overdueCount">0</span></div>
+      <div class="terminal-wrap">
+        <div class="terminal-head">
+          <span>Live Pipeline Reasoning Stream</span>
+        </div>
+        <pre id="liveLog" class="terminal"></pre>
+      </div>
+    </article>
+  </div>
+</section>
+
+<script src="/static/js/dashboard.js"></script>
+{% endblock %}
