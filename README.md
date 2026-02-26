@@ -1,4 +1,4 @@
-# Enterprise Agentic SOC (v1.04)
+# AI Triage Agent SOC Platform (v1.04)
 
 <p align="center">
   <img src="docs/assets/screenshots/screenshot-1.png" alt="Case Detail Overview" width="96%" />
