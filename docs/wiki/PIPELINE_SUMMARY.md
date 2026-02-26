@@ -1,5 +1,13 @@
 # Pipeline Summary (Orchestrated v2)
 
+## Elastic Setup Prerequisite
+
+Use these external references to deploy Elastic before running this pipeline:
+
+- Docker repo: [evermight/elastic-stack-docker-part-two](https://github.com/evermight/elastic-stack-docker-part-two)
+- Official article: [Getting started with the Elastic Stack and Docker Compose (Part 2)](https://www.elastic.co/blog/getting-started-with-the-elastic-stack-and-docker-compose-part-2)
+- Video walkthrough: [Elastic setup walkthrough (YouTube)](https://www.youtube.com/watch?v=q74_FfM7sn0)
+
 ```mermaid
 flowchart TB
   A[Elastic Alert] --> B[Normalize + Deterministic Signals]

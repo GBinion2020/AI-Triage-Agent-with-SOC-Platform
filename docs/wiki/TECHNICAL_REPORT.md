@@ -114,3 +114,11 @@ Validation performed in this workspace:
 - Use `PIPELINE_ARCH=legacy` to fallback to legacy loop.
 - Entra specialist requires credential env vars or it safely returns `skipped`.
 - TLS verification for Elastic is env-controlled (`ELASTIC_VERIFY_TLS`, `ELASTIC_CA_BUNDLE`).
+
+## 9. Elastic Setup References
+
+Use these external references for Elastic-on-Docker setup:
+
+- Docker repo: [evermight/elastic-stack-docker-part-two](https://github.com/evermight/elastic-stack-docker-part-two)
+- Official article: [Getting started with the Elastic Stack and Docker Compose (Part 2)](https://www.elastic.co/blog/getting-started-with-the-elastic-stack-and-docker-compose-part-2)
+- Video walkthrough: [Elastic setup walkthrough (YouTube)](https://www.youtube.com/watch?v=q74_FfM7sn0)

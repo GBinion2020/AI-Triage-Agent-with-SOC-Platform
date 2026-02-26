@@ -154,3 +154,11 @@ pytest -q
 2. Use secret scanning in CI (e.g., `gitleaks` or GitHub Advanced Security).
 3. Add a minimal CI workflow for lint + tests + dependency audit.
 4. Publish an explicit threat model and supported deployment profiles (local lab vs production).
+
+## 11) Elastic Setup References
+
+Use the external Elastic Docker setup resources for this project:
+
+- Docker repo: [evermight/elastic-stack-docker-part-two](https://github.com/evermight/elastic-stack-docker-part-two)
+- Official article: [Getting started with the Elastic Stack and Docker Compose (Part 2)](https://www.elastic.co/blog/getting-started-with-the-elastic-stack-and-docker-compose-part-2)
+- Video walkthrough: [Elastic setup walkthrough (YouTube)](https://www.youtube.com/watch?v=q74_FfM7sn0)

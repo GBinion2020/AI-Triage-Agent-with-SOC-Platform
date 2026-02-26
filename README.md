@@ -84,7 +84,7 @@ flowchart LR
 ## Prerequisites
 
 - Python 3.11+ (project uses local virtualenv scripts).
-- Optional Docker (for SOC UI container path and Elastic stack labs).
+- Optional Docker (for SOC UI and external Elastic stack setup).
 - Accessible Elastic Security endpoint + API key.
 - LLM provider configured (`local` or `external`).
 
@@ -92,6 +92,7 @@ flowchart LR
 
 Complete Elastic environment setup before running this pipeline:
 
+- Docker repo to use: [evermight/elastic-stack-docker-part-two](https://github.com/evermight/elastic-stack-docker-part-two)
 - Official guide: [Getting started with the Elastic Stack and Docker Compose (Part 2)](https://www.elastic.co/blog/getting-started-with-the-elastic-stack-and-docker-compose-part-2)
 - Video walkthrough: [Elastic setup walkthrough (YouTube)](https://www.youtube.com/watch?v=q74_FfM7sn0)
 

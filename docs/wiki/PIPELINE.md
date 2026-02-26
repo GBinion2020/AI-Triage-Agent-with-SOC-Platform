@@ -2,6 +2,14 @@
 
 This document describes the production investigation flow implemented in the current codebase.
 
+## Elastic Setup Prerequisite
+
+Before running this pipeline, set up Elastic using:
+
+- Docker repo: [evermight/elastic-stack-docker-part-two](https://github.com/evermight/elastic-stack-docker-part-two)
+- Official article: [Getting started with the Elastic Stack and Docker Compose (Part 2)](https://www.elastic.co/blog/getting-started-with-the-elastic-stack-and-docker-compose-part-2)
+- Video walkthrough: [Elastic setup walkthrough (YouTube)](https://www.youtube.com/watch?v=q74_FfM7sn0)
+
 ## End-to-End Flow
 
 ```mermaid
